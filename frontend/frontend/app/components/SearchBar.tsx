@@ -1,37 +1,22 @@
-import { FormEvent } from 'react';
-
-/**
- * Props for the SearchBar component.
- */
 interface SearchBarProps {
-  city: string;
-  setCity: (city: string) => void;
-  onSearch: () => void;
+  city: string
+  setCity: (value: string) => void
+  onSearch: () => void
 }
 
-/**
- * SearchBar component for entering city name and triggering weather fetch.
- */
 export default function SearchBar({ city, setCity, onSearch }: SearchBarProps) {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (city.trim()) {
-      onSearch();
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="mb-6">
+    <div className="flex items-center gap-2">
       <input
         type="text"
+        placeholder="Enter city"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city name"
-        className="input input-bordered w-full mb-2 text-gray-700"
+        className="input input-bordered flex-grow"
       />
-      <button type="submit" className="btn btn-primary w-full">
+      <button className="btn btn-primary" onClick={onSearch}>
         Search
       </button>
-    </form>
-  );
+    </div>
+  )
 }
